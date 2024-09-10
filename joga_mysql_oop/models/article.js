@@ -20,6 +20,10 @@ class ArticleModel extends BaseSQLModel{
     async create(article){
         const createdArticleId = await super.create(article);
         return createdArticleId;
-    }   
+    }
+    async update(article){
+        const updatedArticleId = await super.update(article);
+        return updatedArticleId;
+    }    
 }
 module.exports = ArticleModel; 

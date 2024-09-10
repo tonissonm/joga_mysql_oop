@@ -5,7 +5,7 @@ class AuthorModel extends BaseSQLModel{
     }
     async findById(id){
         const author = await super.findById(id);
-        return author[0] ;
+        return author[0];
     } 
         
 }
