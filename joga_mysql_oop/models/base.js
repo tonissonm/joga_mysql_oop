@@ -1,5 +1,5 @@
 const { query } = require('express');
-const conn = require('../utils/db')
+const conn = require('../utils/db');
 
 class BaseSQLModel{
     constructor(tableName){
