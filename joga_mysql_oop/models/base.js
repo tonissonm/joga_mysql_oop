@@ -42,9 +42,9 @@ class BaseSQLModel{
         return results
     } 
     async create(data){
-        const query =`SELECT * FROM ${this.tableName} SET ?`
-        const results = await this.executeQuery(query,[data]) 
-        return results
+        const query =`INSERT INTO ${this.tableName} SET ?`
+        const results = await this.executeQuery(query,data) 
+        return results.insertId
     }
     async update(id,data){
         const query =`SELECT * FROM ${this.tableName} SET ? WHERE id = ?`
