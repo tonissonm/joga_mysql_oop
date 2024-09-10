@@ -5,7 +5,8 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'Imanoobganker1!',
-    database: 'joga_mysql'
+    database: 'joga_mysql',
+    multipleStatements: true
 })
 
 module.exports = db

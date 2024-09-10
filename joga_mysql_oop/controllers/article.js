@@ -1,17 +1,17 @@
 const ArticleDbModel = require('../models/article')
-const ArticleModel = new ArticleDbModel();
+const articleModel = new ArticleDbModel();
 
 class articleController{
     constructor(){
         const articles = []; 
     }
     async getAllArticles(req,res){
-        const articles = await ArticleModel.findAll();
+        const articles = await articleModel.findAll();
         res.status(201).json({articles:articles});
     }
     async getArticleBySlug(req,res){
-        const article = await ArticleModel.findOne(req.params.slug);
+        const article = await articleModel.findOne(req.params.slug);
         res.status(201).json({article: article});
     } 
 } 
-module.exports = articleController;
+module.exports = new articleController();

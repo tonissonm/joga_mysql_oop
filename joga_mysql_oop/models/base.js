@@ -31,11 +31,16 @@ class BaseSQLModel{
         return results
     }
     async findOne(where,value){
-        const query =`SELECT * FROM ${this.tableName} WHERE ${where} = ${value}`
+        const query =`SELECT * FROM ${this.tableName} WHERE ${where} = "${value}"`
         const results = await this.executeQuery(query,[where,value]) 
         return results
 
     }
+    async findMany(where,value){
+        const query = `SELECT * FROM ${this.tableName} WHERE ${where}="${value}"` 
+        const results = await this.executeQuery(query,[where,value])
+        return results
+    } 
     async create(data){
         const query =`SELECT * FROM ${this.tableName} SET ?`
         const results = await this.executeQuery(query,[data]) 
