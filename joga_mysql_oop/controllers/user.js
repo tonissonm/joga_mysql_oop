@@ -46,7 +46,7 @@ class userController{
         conn.query('SELECT * FROM user WHERE username = ?', [username],
         function(error, results, fields) {
           if (error) {
-            res.json({
+            res.status(500).json({
               status: false,
               message: 'There is an error with the Query'
             });
@@ -54,20 +54,32 @@ class userController{
             if (results.length > 0) {
               bcrypt.compare(password, results[0].password,
               function(err, hashPwd) {
+                if(err){
+                    return res.status(500).json({
+                        status: false,
+                        message: 'Error comparing passwords.'
+                    })
+                } 
                 if (hashPwd) {
-                  res.json({
-                    status: true,
-                    message: "Successfully authenticated."
-                  });
+                    req.session.user = {
+                        username: results[0].username,
+                        user_id: results[0].id  
+                    } 
+                    res.status(401).json({
+                        status: true,
+                        message: "Successfully authenticated."
+
+                    });
+
                 } else {
-                  res.json({
+                  res.status(401).json({
                     status: false,
-                    message: "Username and password does not match"
+                    message: "Username and password does not match."
                   });
                 }
               })
             } else {
-              res.json({
+              res.status(404).json({
                 status: false,
                 message: "Username does not exist."
               });
