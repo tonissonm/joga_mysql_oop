@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const userDbModel = require('../models/user');
 const userModel = new userDbModel();
+const conn = require('../utils/db');
 class userController{
     async register(req,res){ 
         const checkUser = await userModel.findOne(req.body.username);
@@ -38,8 +39,41 @@ class userController{
 
         }  
          
-    } 
-    
-
+    }
+    async login(req, res) {
+        let username = req.body.username;
+        let password = req.body.password;
+        conn.query('SELECT * FROM user WHERE username = ?', [username],
+        function(error, results, fields) {
+          if (error) {
+            res.json({
+              status: false,
+              message: 'There is an error with the Query'
+            });
+          } else {
+            if (results.length > 0) {
+              bcrypt.compare(password, results[0].password,
+              function(err, hashPwd) {
+                if (hashPwd) {
+                  res.json({
+                    status: true,
+                    message: "Successfully authenticated."
+                  });
+                } else {
+                  res.json({
+                    status: false,
+                    message: "Username and password does not match"
+                  });
+                }
+              })
+            } else {
+              res.json({
+                status: false,
+                message: "Username does not exist."
+              });
+            }
+          }
+        });
+    }
 }
 module.exports = new userController(); 
