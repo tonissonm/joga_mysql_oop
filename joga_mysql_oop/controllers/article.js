@@ -52,7 +52,7 @@ class articleController{
         const result = await articleModel.delete(id);
         res.status(200).json({
             message:`Deleted article with ID: ${id}`,
-            article: {id:id }
+            article: {id:id}
         }); 
     }   
 } 

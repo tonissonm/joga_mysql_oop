@@ -57,6 +57,7 @@ class BaseSQLModel{
         return result.affectedRows
     }
     
+    
 
 }
 module.exports = BaseSQLModel
