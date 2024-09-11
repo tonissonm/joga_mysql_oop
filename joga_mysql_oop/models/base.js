@@ -46,9 +46,9 @@ class BaseSQLModel{
         const results = await this.executeQuery(query,data) 
         return results.insertId
     }
-    async update(id,data){
-        const query =`UPDATE ${this.tableName} SET ? WHERE id = ?`
-        const result = await this.executeQuery(query,[data, id]) 
+    async update(id, data) {
+        const query = `UPDATE ${this.tableName} SET ? WHERE id = ?`
+        const result = await this.executeQuery(query, [data, id])
         return result.affectedRows
     }
     async delete(data){
