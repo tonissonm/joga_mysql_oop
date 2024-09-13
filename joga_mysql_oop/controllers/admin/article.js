@@ -1,18 +1,8 @@
-const ArticleDbModel = require('../models/article')
+const ArticleDbModel =require('../../models/article');
+const ArticleController = require('../article');
 const articleModel = new ArticleDbModel();
 
-class articleController{
-    constructor(){
-        const articles = []; 
-    }
-    async getAllArticles(req,res){
-        const articles = await articleModel.findAll();
-        res.status(201).json({articles:articles});
-    }
-    async getArticleBySlug(req,res){
-        const article = await articleModel.findOne(req.params.slug);
-        res.status(201).json({article: article});
-    }
+class articleAdminController extends ArticleController{
     async createNewArticle(req,res){
         const newArticle = {
             name: req.body.name,
@@ -26,7 +16,7 @@ class articleController{
         res.status(201).json({
             message: `Created article with ID: ${articleId}`,
             article: {id:articleId, ...newArticle} 
-        }) 
+        })
     }
     async updateArticle(req,res){
         const id = parseInt(req.params.id); 
@@ -55,6 +45,6 @@ class articleController{
             message:`Deleted article with ID: ${id}`,
             article: {id:id}
         }); 
-    }   
-} 
-module.exports = new articleController();
+    }    
+}
+module.exports = new articleAdminController(); 

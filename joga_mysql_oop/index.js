@@ -17,6 +17,8 @@ app.use('/',authorRoutes);
 app.use('/', articleRoutes);
 const userRoutes = require('./routes/users');
 app.use('/',userRoutes);
+const adminRoutes = require('./routes/admin');
+app.use('/',adminRoutes);
 //
 app.listen(3026, ()=>{
     console.log('App is started at http://localhost:3026')

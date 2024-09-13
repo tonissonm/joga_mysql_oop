@@ -10,7 +10,7 @@ class userController{
             console.log('Username is not in the database.');
             console.log(req.body.password);
             const cryptPassword = await bcrypt.hash(req.body.password,10);
-            if(cryptPassword.length >= 72){
+            if(cryptPassword.length >= 60){
                 const registeredId = await userModel.create({
                     username: req.body.username,
                     email: req.body.email,
@@ -20,8 +20,8 @@ class userController{
                 const userData = await userModel.findById(req.body.username);
                 if(registeredId){
                     req.session.user = {
-                        username: userData.username, 
-                        user_id: userData.id
+                        username: registeredId[0], 
+                        user_id: registeredId[1]
                     } 
                 }
                 res.json({
@@ -67,7 +67,10 @@ class userController{
                     } 
                     res.status(401).json({
                         status: true,
-                        message: "Successfully authenticated."
+                        message: "Successfully authenticated.", 
+                        username: results[0].username,
+                        id: results[0].id  
+            
 
                     });
 
