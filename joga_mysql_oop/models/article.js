@@ -23,7 +23,6 @@ class ArticleModel extends BaseSQLModel{
     }
     
     async update(id, articleData) {
-       
         const result = await super.update(id, articleData);
         return result;
     } 

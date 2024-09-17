@@ -7,11 +7,13 @@ class articleController{
     }
     async getAllArticles(req,res){
         const articles = await articleModel.findAll();
-        res.status(201).json({articles:articles});
+        res.render('index',{articles:articles});
+        //res.status(201).json({articles:articles});
     }
     async getArticleBySlug(req,res){
         const article = await articleModel.findOne(req.params.slug);
-        res.status(201).json({article: article});
+        res.render('article',{article: article});
+        //res.status(201).json({article: article});
     }
     async createNewArticle(req,res){
         const newArticle = {
