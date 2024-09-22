@@ -44,7 +44,6 @@ app.use('/',authorRoutes);
 app.use('/', articleRoutes);
 app.use('/',userRoutes);
 app.use('/',adminRoutes);
-//
 app.listen(3026, ()=>{
     console.log('App is started at http://localhost:3026')
 });

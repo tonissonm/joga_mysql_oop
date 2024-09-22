@@ -1,0 +1,23 @@
+<h1>Create a new article</h1>
+<form action="/articles/create" method="POST" enctype="multipart/form-data">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" placeholder="Article name">
+    </div>
+
+    <div>
+        <label for="slug">Slug:</label>
+        <input type="text" name="slug" id="slug" placeholder="Article slug">
+    </div>
+
+    <div>
+        <label for="image">Image:</label>
+        <input type="file" name="image" id="image" placeholder="Article image">
+    </div>
+
+    <div>
+        <label for="body">Body:</label>
+        <textarea name="body" id="body" placeholder="Article content"></textarea>
+    </div>
+    <button type="submit">Create Article</button>
+</form>

@@ -1,6 +1,16 @@
 <h1>Homepage</h1>
-
-<div class ="article-list">
+<div class="login"></div>
+        {{#if user}}
+            <p>Welcome, {{user.username}}!</p>
+            <br>
+            <a href="/user/logout">Logout</a>
+        {{else}}
+            <a href="/user/login">Login</a>
+            <br>
+            <a href="/user/register">Register</a>
+        {{/if}}
+    </div>
+</div class ="article-list">
     {{#articles}}
         <article>
             <a href="/article/{{slug}}">
